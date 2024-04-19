@@ -1,0 +1,26 @@
+import rally.pipeline.ContextRegistry
+import rally.pipeline.workflow.BuildPipeline
+import rally.pipeline.workflow.GitCloneCommand
+import rally.pipeline.workflow.MicroServiceBuildCommand
+import rally.pipeline.workflow.ScanPlateauProductsCommand
+import rally.pipeline.workflow.DeployEnvironmentsCommand
+
+ContextRegistry.registerDefaultContext(this)
+ContextRegistry.setParameter('staticCodeAnalysis', true)
+ContextRegistry.setParameter('env', env.getEnvironment())
+new BuildPipeline()
+        .withRunCondition((env.gitlabMergeRequestId) || (env.gitlabSourceBranch.equalsIgnoreCase("master") && env.gitlabActionType.equalsIgnoreCase("push")))
+        .inSeries(
+                GitCloneCommand.builder()
+                        .withBranch(env.gitlabSourceBranch)
+                        .withRepositoryURL(env.gitlabSourceRepoURL)
+                        .build(),
+                ScanPlateauProductsCommand.builder()
+                        .build(),
+                MicroServiceBuildCommand.builder()
+                        .withPublish(true)
+                        .build(),
+                DeployEnvironmentsCommand.builder()
+                        .build(),
+
+        ).run()

@@ -1,0 +1,11 @@
+buildscript {
+    ext {
+        project.version = '0.1.0'
+        rootProject.version = '0.1.0'
+        if (project.hasProperty('projVersion')) {
+            project.version = project.projVersion
+        }
+        isProduct = 'true'
+        publishSource = 'true'
+    }
+}

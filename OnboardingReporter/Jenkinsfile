@@ -1,0 +1,8 @@
+rallyBuildPipeline()
+.inParallel(
+        run.gradle("build sonarqube")
+)
+.inSeries(
+        run.onBranchOnly('master').gradle("apiCodeGenAll mavenPublish dockerPublish dbMigrationsDockerPublish apiPublishAll")
+)
+.run()

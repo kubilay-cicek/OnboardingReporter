@@ -1,0 +1,37 @@
+buildscript {
+    apply from: '../gradle/base/repos.gradle'
+    
+    repositories.addAll(repos)
+    dependencies {
+        classpath(group: 'rally.commons', name: 'gradle-plugins', version: '5.2.8-RC2')
+        classpath("au.com.dius:pact-jvm-provider-gradle_2.12:3.5.11")
+    }
+}
+
+ext {    
+    javaVersion = JavaVersion.VERSION_17
+    packageRoot = 'rally/services/OnboardingReporter'
+    artifactId  = 'OnboardingReporter'
+    dbMigrationsBasePackage= ""
+    serviceDesc = 'Rally OnboardingReporter Service'
+    publishSource = 'true'
+    isProduct = 'true'
+    apiList = []
+}
+
+group = 'rally.services'
+description = 'Rally OnboardingReporter Service'
+
+
+if (project.hasProperty('projVersion')) {
+    project.version = project.projVersion
+} else {
+    project.version = '0.0.1'
+}
+
+apply plugin: 'rally.plugins.microservice'
+apply plugin: 'rally.plugins.jpaLib'
+apply plugin: 'rally.plugins.swaggerClientLib'
+apply plugin: 'rally.plugins.dbmigrations'
+
+apply from: 'dependencies.gradle'

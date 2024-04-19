@@ -1,0 +1,73 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: ${rallyAppName}
+  cloud:
+    config:
+      uri: http://localhost:7777/config
+      enabled: false
+  session:
+    store-type: none
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL57Dialect
+        hbm2ddl:
+          auto: none
+    application:
+     name: onboarding
+
+
+datasource:
+  common:
+    platform: mysql
+    url: jdbc:mysql://10.223.4.61:30619/onboarding?useSSL=false&autoReconnect=true&maxReconnect=10&characterEncoding=utf8&serverTimezone=Turkey
+    username: root
+    password: Rally_123
+    driver-class-name: com.mysql.jdbc.Driver
+
+
+eureka:
+  client:
+    enabled: false
+    serviceUrl:
+      defaultZone: http://localhost:7777/eureka/
+
+rally:
+  security:
+    authorization:
+      api-security:
+        enabled: false
+      idempotency:
+        enabled: false
+  security-token:
+    enabled: false
+    service-account:
+      enabled: false  
+  web:
+    filters:
+      #token validation is not necessary by default  
+      token-check-filter: false
+      api-security-filter: false
+        #Use rally-commons-integration package with giving this filter
+      external-context-filter: false
+      token-authentication-filter: false
+      http-trace-filter:
+        includeHeaders: true # log da header ların da görülmesi isteniyorsa true yapılmalı (default: false)
+        logLevel: INFO # request-response loglarının hangi log level’ında (INFO, WARNING, DEBUG, ERROR) yazılması isteniyorsa seçilmeli(default: DEBUG)
+        responseLogIncludesRequest: true # response log’una request in de eklenmesi isteniyorsa true yapılmalı (default: false)
+        
+  identity-provider-list:
+    provider-configurations:
+      -
+        auth-server-url: https://iamchannelsecuritytoken.kube.devisbank/auth
+        public-client: true
+        realm: main
+        resource: channel-security      
+             
+springdoc:
+  swagger-ui:
+    path: swagger-ui.html
