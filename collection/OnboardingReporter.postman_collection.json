@@ -1,0 +1,83 @@
+{
+	"info": {
+		"_postman_id": "a3e83987-404d-416a-b109-a7f3dbcd4a2d",
+		"name": "OnboardingReporter",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33845593"
+	},
+	"item": [
+		{
+			"name": "GetAllClientLog",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/client-log/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"client-log",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetClientLogByProcessId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/client-log/processId/2296b310-9605-4dc8-ab32-f497965a1afb",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"client-log",
+						"processId",
+						"2296b310-9605-4dc8-ab32-f497965a1afb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetClientLogByDeviceType",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/client-log/device/ios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"client-log",
+						"device",
+						"ios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetLeadPartyHistoricFlowProcessId",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
