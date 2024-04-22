@@ -1,0 +1,11 @@
+// add service specific dependencies here (or remove unnecessary)
+dependencies {
+    implementation("org.apache.derby:derby:10.17.1.0")
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.13'
+
+    compileOnly("org.projectlombok:lombok:${lombokVersion}")
+    testCompileOnly("org.projectlombok:lombok:${lombokVersion}")
+    annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+    testAnnotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+
+}
